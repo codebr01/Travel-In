@@ -56,6 +56,8 @@ export async function createTrip(app: FastifyInstance) {
       }
     })
 
+    console.log(trip)
+
     const formattedStartDate = dayjs(starts_at).format('LL')
     const formattedEndDate = dayjs(ends_at).format('LL')
 
