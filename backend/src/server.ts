@@ -14,6 +14,8 @@ import { createInvite } from "./routes/create-invite"
 import { updateTrip } from "./routes/update-trip"
 import { getTripDetails } from "./routes/get-trip-details"
 import { getParticipant } from "./routes/get-participant"
+import { registerUser } from "./routes/register-user"
+import { loginUser } from "./routes/login-user"
 import { errorHandler } from "./error-handler"
 import { env } from "./env"
 
@@ -29,6 +31,8 @@ app.setSerializerCompiler(serializerCompiler);
 
 app.setErrorHandler(errorHandler)
 
+app.register(registerUser)
+app.register(loginUser)
 app.register(createTrip)
 app.register(confirmTrip)
 app.register(confirmParticipants)
