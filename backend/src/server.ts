@@ -17,6 +17,7 @@ import { getParticipant } from "./routes/get-participant"
 import { registerUser } from "./routes/register-user"
 import { loginUser } from "./routes/login-user"
 import { errorHandler } from "./error-handler"
+import { validateToken } from "./routes/validade-token"
 import { env } from "./env"
 
 
@@ -45,6 +46,7 @@ app.register(createInvite)
 app.register(updateTrip)
 app.register(getTripDetails)
 app.register(getParticipant)
+app.register(validateToken);
 
 
 app.listen({ port: env.PORT }).then(() => {

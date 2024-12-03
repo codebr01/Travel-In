@@ -90,39 +90,39 @@ body {
 .grid-item:nth-child(1) {
     grid-area: a; 
     height: 250px;
-    background-image: url(/frontend/src/assets/5055648894121259026.jpg);
+    background-image: url(../../assets/5055648894121259026.jpg);
 }
 
 .grid-item:nth-child(2) {
     grid-area: b;
     height: 250px;
     width: 300px;
-    background-image: url(/frontend/src/assets/5055648894121259031.jpg);
+    background-image: url(../../assets/5055648894121259031.jpg);
 }
 
 .grid-item:nth-child(3) {
     grid-area: c;
     height: 250px;
     width: 400px;
-    background-image: url(/frontend/src/assets/5055648894121259027.jpg);
+    background-image: url(../../assets/5055648894121259027.jpg);
 }
 
 .grid-item:nth-child(4) {
     grid-area: d;
     height: 200px;
-    background-image: url(/frontend/src/assets/5055648894121259030.jpg);
+    background-image: url(../../assets/5055648894121259030.jpg);
 }
 
 .grid-item:nth-child(5) {
     grid-area: e;
     height: 200px;
-    background-image: url(/frontend/src/assets/5055648894121259028.jpg);
+    background-image: url(../../assets/5055648894121259028.jpg);
 }
 
 .grid-item:nth-child(6) {
     grid-area: f; 
     height: 200px;
-    background-image: url(/frontend/src/assets/viagem.jpg);
+    background-image: url(../../assets/viagem.jpg);
 }
 
 .content {
@@ -160,7 +160,7 @@ body {
     height: 400px;
     background-color: #333;
     border-radius: 10px;
-    background-image: url(/frontend/src/assets/viagem-internacional-1.jpg);
+    background-image: url(../../assets/viagem-internacional-1.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
@@ -196,19 +196,19 @@ body {
 }
 
 #item01{
-    background-image: url(/frontend/src/assets/explore.png);
+    background-image: url(../../assets/explore.png);
 }
 
 #item02{
-    background-image: url(/frontend/src/assets/clipboard.png);
+    background-image: url(../../assets/clipboard.png);
 }
 
 #item03{
-    background-image: url(/frontend/src/assets/profit.png);
+    background-image: url(../../assets/profit.png);
 }
 
 #item04{
-    background-image: url(/frontend/src/assets/friends.png);
+    background-image: url(../../assets/friends.png);
 }
 
 
