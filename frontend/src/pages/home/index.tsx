@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../lib/axios';
+import { toast, ToastContainer } from "react-toastify";
+import './styles.css';
 
 export function HomePage() {
 
@@ -10,21 +13,133 @@ export function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const validToken = async () => {
+      try {
+        if (!token) {
+          setIsAuthenticated(false);
+          navigate('/login');
+          return;
+        }
 
-    if (token) {
+        const response = await api.post("/validate", { token });
+        const isValid = response.data.valid;
 
-      setIsAuthenticated(true)
-
-    } else {
-      navigate('/login');
-    }
-  }, [navigate]);
+        if (isValid) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+          toast.error(`${response.data.message}`);
+          setTimeout(() => {
+            navigate('/login');
+          }, 2000);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+        navigate('/login');
+      }
+    };
+    validToken();
+  }, [navigate, token]);
 
   return (
     <div>
       {isAuthenticated ? (
         <div>
-          <h1>Login realizado com sucesso...</h1>
+            <ToastContainer />
+            <header className="header">
+                <div className="logo">LOGO</div>
+                <nav className="nav">
+                    <div className="nav-item"></div>
+                    <div className="nav-item"></div>
+                    <div className="nav-item"></div>
+                </nav>
+            </header>
+
+            <main>
+                <section className="hero">
+                    <h1>Planeje sua próxima viagem com facilidade!</h1>
+                    <p>Descubra destinos incríveis, crie roteiros personalizados e organize todos os detalhes em um só lugar.</p>
+                    <div className="email-input">
+                        <input type="email" placeholder="Seu e-mail" />
+                        <button>Enviar</button>
+                    </div>
+                </section>
+
+                <section className="grid-container">
+                    <div className="grid-item"></div>
+                    <div className="grid-item"></div>
+                    <div className="grid-item"></div>
+                    <div className="grid-item"></div>
+                    <div className="grid-item"></div>
+                    <div className="grid-item"></div>
+                </section>
+
+                <section className="content">
+                    <div className="text-content">
+                        <h2>Quem somos?</h2>
+                        <p>
+                            Nosso objetivo é tornar o planejamento de viagens mais simples e acessível para todos.
+                            Com nosso site, você pode explorar destinos incríveis, criar roteiros personalizados e organizar
+                            cada detalhe com facilidade. Junte-se a uma comunidade de viajantes apaixonados e descubra como transformar sonhos de viagem em realidade.
+                        </p>
+                        <button>Saiba mais</button>
+                    </div>
+                    <div className="image-content"></div>
+                </section>
+
+                <section className="cards">
+                    <div className="card">
+                        <div className="card-avatar" id="item01"></div>
+                        <div className="card-title">Explorar Destinos</div>
+                        <div className="card-text">
+                        Descubra novos lugares e inspire-se com destinos que combinam com o seu estilo de viagem. Seja uma viagem cultural, uma aventura na natureza ou uma escapada relaxante, nosso site ajuda você a encontrar o destino perfeito.
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="card-avatar" id="item02"></div>
+                        <div className="card-title">Organização Simples</div>
+                        <div className="card-text">
+                        Planeje cada detalhe da sua viagem de forma fácil e rápida. Crie roteiros personalizados, salve informações importantes e mantenha tudo organizado em um só lugar, sem complicações.
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="card-avatar" id="item03"></div>
+                        <div className="card-title">Economia Inteligente</div>
+                        <div className="card-text">
+                        Otimize seu orçamento com dicas de economia e sugestões de acomodações, passagens e passeios com melhor custo-benefício. Nossa plataforma ajuda você a viajar bem gastando menos.
+                        </div>
+                    </div>
+                    <div className="card">
+                        <div className="card-avatar" id="item04"></div>
+                        <div className="card-title">Adicione Amigos</div>
+                        <div className="card-text">
+                        Convide seus amigos para fazer parte da mesma aventura. Planejem juntos, compartilhem ideias e alinhem cada detalhe para garantir uma viagem inesquecível para todos.
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <section className="cta-section">
+                <div className="cta-content">
+                    <h2>Pronto para sua próxima aventura?</h2>
+                    <p>Descubra como é fácil planejar e organizar a viagem dos seus sonhos.</p>
+                    <a href="/login" className="cta-button">Comece agora</a>
+                </div>
+            </section>
+
+            <footer className="footer">
+                <div className="footer-logo">LOGO</div>
+                <div className="footer-links">
+                    <div className="link"></div>
+                    <div className="link"></div>
+                    <div className="link"></div>
+                </div>
+                <div className="footer-icons">
+                    <div className="icon"></div>
+                    <div className="icon"></div>
+                    <div className="icon"></div>
+                </div>
+            </footer>
         </div>
       ) : (
         <h1>Redirecionando para o login...</h1>
