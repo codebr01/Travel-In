@@ -44,6 +44,8 @@ export function HomePage() {
   return (
     <div>
       {isAuthenticated ? (
+        <h1>Redirecionando para o darshboard...</h1>
+      ) : (
         <div>
             <ToastContainer />
             <header className="header">
@@ -141,8 +143,6 @@ export function HomePage() {
                 </div>
             </footer>
         </div>
-      ) : (
-        <h1>Redirecionando para o login...</h1>
       )}
     </div>
   );
