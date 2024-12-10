@@ -19,6 +19,7 @@ import { loginUser } from "./routes/login-user"
 import { errorHandler } from "./error-handler"
 import { validateToken } from "./routes/validade-token"
 import { env } from "./env"
+import { getTrips } from "./routes/get-trips"
 
 
 const app = fastify();
@@ -30,23 +31,24 @@ app.register(cors, {
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
-app.setErrorHandler(errorHandler)
+app.setErrorHandler(errorHandler);
 
-app.register(registerUser)
-app.register(loginUser)
-app.register(createTrip)
-app.register(confirmTrip)
-app.register(confirmParticipants)
-app.register(createActivity)
-app.register(getActivities)
-app.register(createLink)
-app.register(getLinks)
-app.register(getParticipants)
-app.register(createInvite)
-app.register(updateTrip)
-app.register(getTripDetails)
-app.register(getParticipant)
+app.register(registerUser);
+app.register(loginUser);
+app.register(createTrip);
+app.register(confirmTrip);
+app.register(confirmParticipants);
+app.register(createActivity);
+app.register(getActivities);
+app.register(createLink);
+app.register(getLinks);
+app.register(getParticipants);
+app.register(createInvite);
+app.register(updateTrip);
+app.register(getTripDetails);
+app.register(getParticipant);
 app.register(validateToken);
+app.register(getTrips);
 
 
 app.listen({ port: env.PORT }).then(() => {

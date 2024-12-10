@@ -3,6 +3,7 @@ import { api } from '../../lib/axios';
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { ArrowLeftCircleIcon } from "lucide-react";
 
 export function LoginPage() {
 
@@ -32,7 +33,7 @@ export function LoginPage() {
       toast.success("Login bem-sucedido!");
 
       setTimeout(() => {
-        navigate('/');
+        navigate(`/dashboard/${userId}`);
       }, 2000);
 
     } catch (error: any) {
@@ -82,6 +83,16 @@ export function LoginPage() {
         <p className="text-sm text-center text-gray-300">
           Não tem uma conta? <a href="/register" className="text-lime-200 underline">Cadastre-se</a>
         </p>
+        <div>
+          <a
+            className="flex items-center gap-2 text-sm text-lime-200 hover:text-lime-600 underline"
+            href="/"
+          >
+            <ArrowLeftCircleIcon />
+            Voltar
+          </a>
+        </div>
+
       </div>
     </div>
   );

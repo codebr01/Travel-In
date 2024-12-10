@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { InviteGuestsModal } from './invite-guests-modal';
 import { ConfirmTripModal } from './confirm-trip-modal';
 import { DestinationAndDateStep } from './steps/destination-and-date-step';
@@ -8,6 +8,8 @@ import { DateRange } from 'react-day-picker';
 import { api } from '../../lib/axios';
 
 export function CreateTripPage() {
+
+  const { owner } = useParams<{ owner: string }>()
 
   const navigate = useNavigate()
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
@@ -65,16 +67,11 @@ export function CreateTripPage() {
       return
     }
 
-    console.log(destination)
-    console.log(eventStartAndEndDates)
-    console.log(emailsToInvite)
-    console.log(ownerEmail)
-    console.log(ownerName)
-
     const response = await api.post('/trips', {
       destination,
       starts_at: eventStartAndEndDates.from,
       ends_at: eventStartAndEndDates.to,
+      owner,
       emails_to_invite: emailsToInvite,
       owner_name: ownerName,
       owner_email: ownerEmail

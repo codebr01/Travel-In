@@ -38,7 +38,7 @@ export async function loginUser(app: FastifyInstance) {
     const token = jwt.sign(
       { userId: user.user_id },
       JWT_SECRET,
-      { expiresIn: '1m' }
+      { expiresIn: '10s' }
     );
 
     return { userId: user.user_id, token: token }

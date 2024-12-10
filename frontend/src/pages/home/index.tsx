@@ -10,36 +10,26 @@ import { Sections } from "./sections";
 
 export function HomePage() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  // const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId")
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const validToken = async () => {
-      try {
-        if (!token) {
-          setIsAuthenticated(false);
-          navigate('/');
-          return;
-        }
 
-        const response = await api.post("/validate", { token });
-        const isValid = response.data.valid;
+      const response = await api.post("/validate", { token });
+      const isValid = response.data.valid;
 
-        if (isValid) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-          toast.error(`${response.data.message}`);
-          setTimeout(() => {
-            navigate('/');
-          }, 2000);
-        }
-      } catch (error) {
-        setIsAuthenticated(false);
-        navigate('/');
+      console.log(response.data.message)
+
+      if (isValid) {
+        // setIsAuthenticated(true);
+        navigate(`/dashboard/${userId}`)
+      } else {
+        toast.error(`${response.data.message}`)
       }
     };
     validToken();
@@ -47,23 +37,17 @@ export function HomePage() {
 
   return (
     <div>
-      {isAuthenticated ? (
-        <h1>Redirecionando para o darshboard...</h1>
-      ) : (
-        <div>
 
-          <ToastContainer />
+      <ToastContainer />
 
-          <Header />
+      <Header />
 
-          <Main/>
+      <Main />
 
-          <Sections/>
+      <Sections />
 
-          <Footer/>
-          
-        </div>
-      )}
+      <Footer />
+
     </div>
   );
 }
