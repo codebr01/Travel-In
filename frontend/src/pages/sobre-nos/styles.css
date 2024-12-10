@@ -96,7 +96,7 @@ body {
 
 .about-section {
     padding: 60px 0;
-    height: 400px;
+    height: 500px;
 }
 
 .about-content {
@@ -109,9 +109,41 @@ body {
     flex: 1;
 }
 
-.about-image img {
-    width: 100%;
+.team-working{
+    display: flex;
+    margin-top: 40px;
+}
+
+.team-working > div{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#image01{
+    background-image: url(/frontend/src/assets/bruna.png);
+    background-size: contain;
+    background-position: center;
+}
+
+
+#image02{
+    background-image: url(/frontend/src/assets/bruna.png);
+    background-size: contain;
+    background-position: center;
+}
+
+#image03{
+    background-image: url(/frontend/src/assets/bruna.png);
+    background-size: contain;
+    background-position: center;
+}
+
+.about-image{
+    width: 270px;
+    height: 270px;
+    background-color: #00FF80;
     border-radius: 10px;
+    margin: 0 auto;
 }
 
 .values-section {
@@ -136,7 +168,7 @@ body {
     flex: 1 1 300px;
     background-color: #fff;
     color: #333;
-    padding: 20px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;

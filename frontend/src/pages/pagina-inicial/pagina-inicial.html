@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Usuário - Trip Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><img src="/frontend/src/assets/logo1.png"></div>
+        <nav class="nav">
+            <div class="nav-item"><a href="/frontend/src/pages/home/home.html">Início</a></div>
+            <div class="nav-item"><a href="/frontend/src/pages/sobre-nos/sobre-nos.html">Sobre nós</a></div>
+            <div class="nav-item"><a href="/frontend/src/pages/contato/contato.html">Contato</a></div>
+            <div class="button">SAIR</div>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <div class="container dashboard-container">
+            <aside class="user-sidebar">
+                <div class="user-avatar"></div>
+                <h2>Bem-vindo, André</h2>
+                <p>Gerencie seu perfil e suas viagens aqui.</p>
+                <a href="" class="btn-secondary">Editar Perfil</a>
+            </aside>
+
+            <section class="trips-section">
+                <h2>Suas Viagens</h2>
+                <div class="trips-wrapper">
+                    <div class="no-trips">
+                        <p class="no-trips-message">Você ainda não tem viagens programadas. Que tal começar uma agora?</p>
+                        <button class="btn-primary" id="add-trip-btn">Cadastrar Viagem</button>
+                    </div>
+
+                    <div class="trip-card">
+                        <h3>Viagem para Paris</h3>
+                        <p><strong>Data:</strong> 20 de Dezembro, 2024</p>
+                        <p><strong>Participantes:</strong> Você e 3 amigos</p>
+                        <a href="#" class="btn-primary">Ver Detalhes</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Trip Planner. Explorando o mundo juntos.</p>
+        </div>
+    </footer>
+</body>
+</html>
