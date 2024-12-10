@@ -61,9 +61,13 @@ body {
     transition: 0.3s;
 }
 
+#hero-about {
+    background-image: url(../../assets/shocked-woman-holding-map-phone.jpg);
+}
+
 .hero-about {
     position: relative;
-    background-image: url('/frontend/src/assets/shocked-woman-holding-map-phone.jpg');
+    /* background-image: url('../../assets/shocked-woman-holding-map-phone.jpg'); */
     background-size: cover;
     background-position: center;
     height: 100vh;

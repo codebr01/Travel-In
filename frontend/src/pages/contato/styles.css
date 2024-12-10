@@ -62,7 +62,7 @@ body {
 }
 
 .hero-contact {
-    background-image: url('/frontend/src/assets/full-shot-woman-taking-photos.jpg');
+    background-image: url('../../assets/full-shot-woman-taking-photos.jpg');
     background-size: contain;
     background-position: right;
     height: 100vh;
