@@ -6,6 +6,7 @@ import { HomePage } from "./pages/home"
 import { RegisterPage } from "./pages/register"
 import { AboustUsPage } from "./pages/sobre-nos/about-us"
 import { ContatoPage } from "./pages/contato/contato"
+import { Dashboard } from "./pages/dashboard"
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,12 @@ const router = createBrowserRouter([
     element: <RegisterPage/>
   },
   {
-    path: "/trip/create",
+    path: "/:owner/trip/create",
     element: <CreateTripPage/>
+  },
+  {
+    path: "/dashboard/:userId",
+    element: <Dashboard/>
   },
   {
     path: "/trips/:tripId",
