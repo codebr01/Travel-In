@@ -9,6 +9,7 @@ datasource db {
 
 model Trip {
   id           String        @id @default(uuid())
+  owner        String
   destination  String
   starts_at    DateTime
   ends_at      DateTime
@@ -58,4 +59,6 @@ model User {
   user_name     String
   user_email    String @unique
   user_password String
+
+  @@map("users")
 }

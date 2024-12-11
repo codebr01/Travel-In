@@ -30,7 +30,7 @@ export function ConfirmTripModal({
           </p>
         </div>
 
-        <form onClick={createTrip} className="space-y-3" >
+        <form onSubmit={createTrip} className="space-y-3" >
 
           <div className='h-14 px-4 border border-zinc-800 bg-zinc-950 rounded-lg flex items-center gap-2'>
             <User className='text-zinc-400 size-5' />
