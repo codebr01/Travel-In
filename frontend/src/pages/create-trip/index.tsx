@@ -1,21 +1,22 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { InviteGuestsModal } from './invite-guests-modal';
 import { ConfirmTripModal } from './confirm-trip-modal';
 import { DestinationAndDateStep } from './steps/destination-and-date-step';
 import { InviteGuestsStep } from './steps/invite-guests-step';
 import { DateRange } from 'react-day-picker';
 import { api } from '../../lib/axios';
+import logo from '../../assets/logo1.png';
 
 export function CreateTripPage() {
+
+  const { owner } = useParams<{ owner: string }>()
 
   const navigate = useNavigate()
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
   const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false)
-  const [emailsToInvite, setEmailsToInvite] = useState([
-    'joaonetoprivado2001@gmail.com'
-  ])
+  const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
 
   const [destination, setDestination] = useState('')
   const [ownerName, setOwnerName] = useState('')
@@ -49,32 +50,31 @@ export function CreateTripPage() {
   async function createTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if(!destination) {
+    if (!destination) {
       return
     }
 
-    if(!eventStartAndEndDates?.from || !eventStartAndEndDates.to) {
+    if (!eventStartAndEndDates?.from || !eventStartAndEndDates.to) {
       return
     }
 
-    if(emailsToInvite.length == 0) {
+    if (!emailsToInvite) {
       return
     }
 
-    if(!ownerEmail || !ownerName) {
+    if (emailsToInvite.length == 0) {
       return
     }
 
-    console.log(destination)
-    console.log(eventStartAndEndDates)
-    console.log(emailsToInvite)
-    console.log(ownerEmail)
-    console.log(ownerName)
+    if (!ownerEmail || !ownerName) {
+      return
+    }
 
     const response = await api.post('/trips', {
       destination,
       starts_at: eventStartAndEndDates.from,
       ends_at: eventStartAndEndDates.to,
+      owner,
       emails_to_invite: emailsToInvite,
       owner_name: ownerName,
       owner_email: ownerEmail
@@ -115,20 +115,20 @@ export function CreateTripPage() {
   }
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen flex items-center justify-center bg-black">
       <div className="max-w-3xl w-full px-6 text-center space-y-10">
         <div className='flex flex-col items-center gap-3'>
-          <img src="#" alt="travel-in" />
+          <img src={logo} alt="travel-in" />
           <p className="text-zinc-300 text-lg">Convide seus amigos e planeje sua próxima viagem!</p>
         </div>
 
         <div className='space-y-4'>
-          
+
           <DestinationAndDateStep
             closeGuestsInput={closeGuestsInput}
             isGuestsInputOpen={isGuestsInputOpen}
             openGuestsInput={openGuestsInput}
-            setDestination = {setDestination}
+            setDestination={setDestination}
             eventStartAndEndDates={eventStartAndEndDates}
             setEventStartAndEndDates={setEventStartAndEndDates}
           />

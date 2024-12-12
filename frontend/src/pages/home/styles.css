@@ -19,8 +19,14 @@ body {
     background-color: #000;
 }
 
-.logo {
-    font-size: 1.5rem;
+.logo > img{
+    width: 150px;
+    height: 75px;
+    margin-left: 30px;
+}
+
+#logo-h {
+    background-image: url(../../assets/logo1.png);
 }
 
 .nav {
@@ -28,10 +34,34 @@ body {
     gap: 10px;
 }
 
-.nav-item {
-    width: 30px;
-    height: 5px;
-    background-color: #444;
+.nav-item{
+    margin-top: 10px;
+}
+
+.nav-item > a{
+    margin-left: 20px;
+    text-decoration: none;
+    color: #f7f7f7;
+}
+
+.nav-item > a:hover{
+    background-color: #28a745;
+    transition: 0.3s;
+    padding: 5px;
+}
+
+.button{
+    background-color: #00FF80;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 30px;
+    color: #04290d;
+}
+
+.button:hover{
+    background-color: #28a745;
+    transition: 0.3s;
 }
 
 .hero {
@@ -63,8 +93,8 @@ body {
 .email-input button {
     padding: 10px;
     border: none;
-    background-color: #00FF80;
-    color: #000;
+    /* background-color: #00FF80; */
+    /* color: #000; */
     border-radius: 5px;
     cursor: pointer;
 }
@@ -90,39 +120,39 @@ body {
 .grid-item:nth-child(1) {
     grid-area: a; 
     height: 250px;
-    background-image: url(/frontend/src/assets/5055648894121259026.jpg);
+    background-image: url(../../assets/5055648894121259026.jpg);
 }
 
 .grid-item:nth-child(2) {
     grid-area: b;
     height: 250px;
     width: 300px;
-    background-image: url(/frontend/src/assets/5055648894121259031.jpg);
+    background-image: url(../../assets/5055648894121259031.jpg);
 }
 
 .grid-item:nth-child(3) {
     grid-area: c;
     height: 250px;
     width: 400px;
-    background-image: url(/frontend/src/assets/5055648894121259027.jpg);
+    background-image: url(../../assets/5055648894121259027.jpg);
 }
 
 .grid-item:nth-child(4) {
     grid-area: d;
     height: 200px;
-    background-image: url(/frontend/src/assets/5055648894121259030.jpg);
+    background-image: url(../../assets/5055648894121259030.jpg);
 }
 
 .grid-item:nth-child(5) {
     grid-area: e;
     height: 200px;
-    background-image: url(/frontend/src/assets/5055648894121259028.jpg);
+    background-image: url(../../assets/5055648894121259028.jpg);
 }
 
 .grid-item:nth-child(6) {
     grid-area: f; 
     height: 200px;
-    background-image: url(/frontend/src/assets/viagem.jpg);
+    background-image: url(../../assets/viagem.jpg);
 }
 
 .content {
@@ -148,8 +178,8 @@ body {
 .text-content button {
     margin-top: 20px;
     padding: 10px;
-    background-color: #00FF80;
-    color: #000;
+    /* background-color: #00FF80; */
+    /* color: #000; */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -160,7 +190,7 @@ body {
     height: 400px;
     background-color: #333;
     border-radius: 10px;
-    background-image: url(/frontend/src/assets/viagem-internacional-1.jpg);
+    background-image: url(../../assets/viagem-internacional-1.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
@@ -196,19 +226,19 @@ body {
 }
 
 #item01{
-    background-image: url(/frontend/src/assets/explore.png);
+    background-image: url(../../assets/explore.png);
 }
 
 #item02{
-    background-image: url(/frontend/src/assets/clipboard.png);
+    background-image: url(../../assets/clipboard.png);
 }
 
 #item03{
-    background-image: url(/frontend/src/assets/profit.png);
+    background-image: url(../../assets/profit.png);
 }
 
 #item04{
-    background-image: url(/frontend/src/assets/friends.png);
+    background-image: url(../../assets/friends.png);
 }
 
 
@@ -258,13 +288,13 @@ body {
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
-    background-color: #00FF80;
-    color: #04290d;
+    /* background-color: #00FF80; */
+    /* color: #04290d; */
     font-size: 1.1em;
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    /* transition: background-color 0.3s ease; */
 }
 
 .cta-button:hover {
@@ -273,23 +303,8 @@ body {
 
 .footer {
     background-color: #000;
+    color: #fff;
+    text-align: center;
     padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.footer-logo {
-    font-size: 1.5rem;
-}
-
-.footer-links, .footer-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.link, .icon {
-    width: 30px;
-    height: 5px;
-    background-color: #444;
-}
