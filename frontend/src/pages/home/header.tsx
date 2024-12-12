@@ -12,12 +12,12 @@ export function Header() {
   return (
 
     <header className="header">
-      <div className="logo"><img src={logo} alt="logo"/></div>
+      <div className="logo"><img src={logo} alt="logo" /></div>
       <nav className="nav">
         <div className="nav-item"><a href="/">Início</a></div>
         <div className="nav-item"><a href="/sobre">Sobre nós</a></div>
         <div className="nav-item"><a href="/contato">Contato</a></div>
-        <div className="button" onClick={handleLogin} >Login</div>
+        <div className="button bg-lime-300 text-lime-950 hover:bg-lime-400" onClick={handleLogin} >Login</div>
       </nav>
     </header>
 

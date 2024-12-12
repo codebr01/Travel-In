@@ -20,6 +20,7 @@ import { errorHandler } from "./error-handler"
 import { validateToken } from "./routes/validade-token"
 import { env } from "./env"
 import { getTrips } from "./routes/get-trips"
+import { getUser } from "./routes/get-user"
 
 
 const app = fastify();
@@ -49,7 +50,7 @@ app.register(getTripDetails);
 app.register(getParticipant);
 app.register(validateToken);
 app.register(getTrips);
-
+app.register(getUser);
 
 app.listen({ port: env.PORT }).then(() => {
   console.log('Server running -> http://localhost:3333');

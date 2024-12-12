@@ -4,7 +4,7 @@ export function Sections() {
       <div className="cta-content">
         <h2>Pronto para sua próxima aventura?</h2>
         <p>Descubra como é fácil planejar e organizar a viagem dos seus sonhos.</p>
-        <a href="/login" className="cta-button">Comece agora</a>
+        <a href="/login" className="text-xl bg-lime-300 text-lime-950 hover:bg-lime-400 py-4 px-8 rounded-[5px]">Comece agora</a>
       </div>
     </section>
   )

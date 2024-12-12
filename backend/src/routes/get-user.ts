@@ -4,9 +4,9 @@ import { z } from "zod"
 import { prisma } from "../lib/prisma"
 import { ClientError } from "../errors/client-error"
 
-export async function getTrips(app: FastifyInstance) {
+export async function getUser(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    '/dashboard/:userId',
+    '/users/:userId',
     {
       schema: {
         params: z.object({
@@ -18,21 +18,20 @@ export async function getTrips(app: FastifyInstance) {
 
       const { userId } = request.params
 
-      const trips = await prisma.trip.findMany({
+      const user = await prisma.user.findFirst({
         select: {
-          id: true,
-          destination: true,
-          starts_at: true,
-          ends_at: true
+          user_id: true,
+          user_email: true,
+          user_name: true,
         },
-        where: { owner: userId }
+        where: { user_id: userId }
       })
 
-      if (!trips) {
-        throw new ClientError('User does not have trips.')
+      if (!user) {
+        throw new ClientError('User not found.')
       }
 
-      return { trips }
+      return { user }
     }
   )
 }

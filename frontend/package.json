@@ -13,6 +13,7 @@
     "axios": "^1.7.7",
     "buffer": "^6.0.3",
     "date-fns": "^3.6.0",
+    "dayjs": "^1.11.13",
     "env": "^0.0.2",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
