@@ -93,8 +93,8 @@ body {
 .email-input button {
     padding: 10px;
     border: none;
-    background-color: #00FF80;
-    color: #000;
+    /* background-color: #00FF80; */
+    /* color: #000; */
     border-radius: 5px;
     cursor: pointer;
 }
@@ -178,8 +178,8 @@ body {
 .text-content button {
     margin-top: 20px;
     padding: 10px;
-    background-color: #00FF80;
-    color: #000;
+    /* background-color: #00FF80; */
+    /* color: #000; */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -288,13 +288,13 @@ body {
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
-    background-color: #00FF80;
-    color: #04290d;
+    /* background-color: #00FF80; */
+    /* color: #04290d; */
     font-size: 1.1em;
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    /* transition: background-color 0.3s ease; */
 }
 
 .cta-button:hover {

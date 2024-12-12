@@ -6,7 +6,7 @@ export function Main() {
         <p>Descubra destinos incríveis, crie roteiros personalizados e organize todos os detalhes em um só lugar.</p>
         <div className="email-input">
           <input type="email" placeholder="Seu e-mail" />
-          <button>Enviar</button>
+          <button className="bg-lime-300 text-lime-950 hover:bg-lime-400">Enviar</button>
         </div>
       </section>
 
@@ -27,7 +27,7 @@ export function Main() {
             Com nosso site, você pode explorar destinos incríveis, criar roteiros personalizados e organizar
             cada detalhe com facilidade. Junte-se a uma comunidade de viajantes apaixonados e descubra como transformar sonhos de viagem em realidade.
           </p>
-          <button>Saiba mais</button>
+          <button className="bg-lime-300 text-lime-950 hover:bg-lime-400">Saiba mais</button>
         </div>
         <div className="image-content"></div>
       </section>
