@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 export function TripDetails() {
 
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] = useState(false)
-  const userId = localStorage.getItem("userId")
+  // const userId = localStorage.getItem("userId")
   const navigate = useNavigate();
 
 
@@ -29,13 +29,14 @@ export function TripDetails() {
       <DestinationAndDateHeader />
 
       <div>
-        <a
+        <button
           className="py-2 w-[100px] rounded-lg px-3 font-medium flex items-center justify-center gap-2 bg-lime-300 text-lime-950 hover:bg-lime-400"
-          href={`/dashboard/${userId}`}
+          // href={`/dashboard/${userId}`}
+          onClick={() => navigate(-1)}
         >
           <ArrowLeftCircleIcon />
           Voltar
-        </a>
+        </button>
       </div>
 
       <main className="flex gap-16 px-4">
@@ -70,6 +71,7 @@ export function TripDetails() {
           closeCreateActivityModal={closeCreateActivityModal}
         />
       )}
+
     </div>
   )
 }
