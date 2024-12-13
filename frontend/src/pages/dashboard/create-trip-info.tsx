@@ -15,7 +15,7 @@ export function CreateTripInfo({
     <>
       <h2 className="text-3xl font-semibold text-white">Comece sua viagem</h2>
       <div className="flex items-center gap-3">
-        <p className="">Você ainda não tem viagens. <br/> Que tal começar uma agora?</p>
+        <p className="">Você ainda não tem viagens. Que tal começar uma agora?</p>
         <div className="flex items-center">
           <button
             onClick={() => navigate(`/${userId}/trip/create`)}
