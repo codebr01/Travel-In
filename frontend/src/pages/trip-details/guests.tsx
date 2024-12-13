@@ -1,8 +1,10 @@
 import { CheckCircle2, CircleDashed, UserCog } from "lucide-react";
 import { Button } from "../../components/button";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import { api } from "../../lib/axios";
+import { ChangeParticipantsModal } from "./change-participants";
+
 
 interface Participant {
   id: string
@@ -14,11 +16,53 @@ interface Participant {
 export function Guests() {
 
   const { tripId } = useParams()
+  const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
   const [participants, setParticipants] = useState<Participant[]>([])
+  const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
 
   useEffect(() => {
-    api.get(`/trips/${tripId}/participants`).then(response => setParticipants(response.data.participants))
+    api.get(`/trips/${tripId}/participants`).then(response => {
+      setParticipants(response.data.participants);
+      const emails = response.data.participants.map((participant: Participant) => participant.email);
+      setEmailsToInvite(emails);
+    });
   }, [tripId])
+
+  function openGuestsModel() {
+    setIsGuestsModalOpen(true)
+  }
+
+  function closeGuestsModel() {
+    setIsGuestsModalOpen(false)
+  }
+
+  function addNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
+
+    event.preventDefault()
+
+    const data = new FormData(event.currentTarget)
+    const email = data.get('email')?.toString()
+
+    if (!email) {
+      return
+    }
+
+    if (emailsToInvite.includes(email)) {
+      return
+    }
+
+    setEmailsToInvite([
+      ...emailsToInvite, email
+    ])
+
+    event.currentTarget.reset()
+  }
+
+  function removeEmailFromInvites(emailToRemove: string) {
+    const newEmailList = emailsToInvite.filter(email => email !== emailToRemove)
+
+    setEmailsToInvite(newEmailList)
+  }
 
   return (
     <div className="space-y-6">
@@ -38,7 +82,7 @@ export function Guests() {
               </div>
               {participant.is_confirmed ? (
                 <CheckCircle2 className="text-green-400 size-5 shrink-0" />
-              ): (
+              ) : (
                 <CircleDashed className="text-zinc-400 size-5" />
               )}
             </div>
@@ -47,10 +91,20 @@ export function Guests() {
 
       </div>
 
-      <Button variant="secundary" size="full" >
+      <Button variant="secundary" onClick={openGuestsModel} size="full" >
         <UserCog className='size-5' />
         Gerenciar convidados
       </Button>
+
+      {isGuestsModalOpen && (
+        <ChangeParticipantsModal
+          emailsToInvite={emailsToInvite}
+          addNewEmailToInvite={addNewEmailToInvite}
+          closeGuestsModel={closeGuestsModel}
+          removeEmailFromInvites={removeEmailFromInvites}
+        />
+      )}
+
     </div>
   )
 }
