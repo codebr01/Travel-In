@@ -3,6 +3,8 @@ import { Button } from "../../components/button"
 import { FormEvent } from "react"
 import { api } from "../../lib/axios"
 import { useParams } from "react-router-dom"
+import { toast, ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
 
 interface CreateActivityModalProps {
   closeCreateActivityModal: () => void
@@ -22,17 +24,30 @@ export function CreateActivityModal({
     const title = data.get('title')?.toString()
     const occurs_at = data.get('occours_at')?.toString()
 
-    await api.post(`/trips/${tripId}/activities`, {
-      title,
-      occurs_at
-    })
+    try{
+      const response = await api.post(`/trips/${tripId}/activities`, {
+        title,
+        occurs_at
+      })
+  
+      if (response.status === 400) {
+        toast.error(response.data.message || 'Erro ao criar a atividade')
+        return;
+      }
 
-    window.document.location.reload()
+      toast.success('Atividade criada com sucesso!')
+
+      window.document.location.reload()
+
+    }catch(error: any) {
+      toast.error(error.response?.data?.message || 'Ocorreu um erro ao criar a atividade.');
+    }
 
   }
 
   return (
     <div className='fixed inset-0 bg-black/60 flex items-center justify-center'>
+      <ToastContainer autoClose={8000} />
       <div className='w-[640px] rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5'>
         <div className='space-y-2'>
           <div className='flex items-center justify-between'>

@@ -24,7 +24,7 @@ export async function createTrip(app: FastifyInstance) {
     },
   }, async (request) => {
 
-    const { destination, starts_at, ends_at, owner,owner_name, owner_email, emails_to_invite } = request.body
+    const { destination, starts_at, ends_at, owner, owner_name, owner_email, emails_to_invite } = request.body
 
     if (dayjs(starts_at).isBefore(new Date())) {
       throw new ClientError('Invalid trip start date.')
@@ -34,9 +34,43 @@ export async function createTrip(app: FastifyInstance) {
       throw new ClientError('Invalid trip end date.')
     }
 
+    const conflictingTrips = await prisma.trip.findMany({
+      where: {
+        OR: [
+          { owner }, // O usuário é o proprietário
+          {
+            participants: {
+              some: {
+                email: owner_email // O usuário é participante
+              }
+            }
+          }
+        ],
+        AND: [
+          {
+            OR: [
+              {
+                starts_at: {
+                  lte: ends_at, // Início da viagem no banco é antes ou durante o término da nova viagem
+                },
+                ends_at: {
+                  gte: starts_at, // Término da viagem no banco é depois ou durante o início da nova viagem
+                }
+              }
+            ]
+          }
+        ]
+      }
+    });
+
+    if (conflictingTrips.length > 0) {
+      throw new ClientError('You already have a trip during the selected dates.');
+    }
+
     const trip = await prisma.trip.create({
       data: {
         owner,
+        owner_email: owner_email,
         destination,
         starts_at,
         ends_at,
@@ -57,8 +91,6 @@ export async function createTrip(app: FastifyInstance) {
         }
       }
     })
-
-    console.log(trip)
 
     const formattedStartDate = dayjs(starts_at).format('LL')
     const formattedEndDate = dayjs(ends_at).format('LL')

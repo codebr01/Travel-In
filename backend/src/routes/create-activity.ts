@@ -3,8 +3,10 @@ import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from "zod"
 import { prisma } from "../lib/prisma"
 import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc";
 import { ClientError } from "../errors/client-error"
 
+dayjs.extend(utc);
 
 export async function createActivity(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -19,7 +21,7 @@ export async function createActivity(app: FastifyInstance) {
           occurs_at: z.coerce.date(),
         })
       },
-    }, 
+    },
     async (request) => {
 
       const { tripId } = request.params
@@ -32,13 +34,17 @@ export async function createActivity(app: FastifyInstance) {
       if (!trip) {
         throw new ClientError('Trip not found.')
       }
-
-      if (dayjs(occurs_at).isBefore(trip.starts_at)) {
-        throw new ClientError('Invalid activity date.')
+  
+      const occursAtUTC = dayjs(occurs_at).utc();
+      const tripEndsAtUTC = dayjs(trip.ends_at).utc();
+      const tripStartsAtUTC = dayjs(trip.starts_at).utc();
+      
+      if (occursAtUTC.isBefore(tripStartsAtUTC)) {
+        throw new ClientError(`Invalid activity date: occurs_at(${occursAtUTC.format("YYYY-MM-DD HH:mm:ss")}) is before trip starts(${tripStartsAtUTC.format("YYYY-MM-DD HH:mm:ss")}).`)
       }
       
-      if (dayjs(occurs_at).isAfter(trip.ends_at)) {
-        throw new ClientError('Invalid activity date.')
+      if (occursAtUTC.isAfter(tripEndsAtUTC)) {
+        throw new ClientError(`Invalid activity date: occurs_at(${occursAtUTC.format("YYYY-MM-DD HH:mm:ss")}) is after trip ends(${tripEndsAtUTC.format("YYYY-MM-DD HH:mm:ss")}).`)
       }
 
       const activity = await prisma.activity.create({

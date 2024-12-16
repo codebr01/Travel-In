@@ -10,6 +10,7 @@ datasource db {
 model Trip {
   id           String        @id @default(uuid())
   owner        String
+  owner_email  String        @default("No Email")
   destination  String
   starts_at    DateTime
   ends_at      DateTime
