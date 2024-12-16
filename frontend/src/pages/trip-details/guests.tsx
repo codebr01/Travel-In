@@ -91,19 +91,20 @@ export function Guests() {
 
       </div>
 
-      <Button variant="secundary" onClick={openGuestsModel} size="full" >
+      {/* <Button variant="secundary" onClick={openGuestsModel} size="full" >
         <UserCog className='size-5' />
         Gerenciar convidados
-      </Button>
+      </Button> */}
 
-      {isGuestsModalOpen && (
+      {/* {isGuestsModalOpen && (
         <ChangeParticipantsModal
           emailsToInvite={emailsToInvite}
           addNewEmailToInvite={addNewEmailToInvite}
           closeGuestsModel={closeGuestsModel}
           removeEmailFromInvites={removeEmailFromInvites}
+          changeGuests={changeGuests}
         />
-      )}
+      )} */}
 
     </div>
   )

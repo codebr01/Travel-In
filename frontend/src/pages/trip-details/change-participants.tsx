@@ -7,13 +7,15 @@ interface ChangeParticipantsProps {
   emailsToInvite: string[]
   addNewEmailToInvite: (event: FormEvent<HTMLFormElement>) => void
   removeEmailFromInvites: (email: string) => void
+  changeGuests: () => void
 }
 
 export function ChangeParticipantsModal({
   addNewEmailToInvite,
   closeGuestsModel,
   emailsToInvite,
-  removeEmailFromInvites
+  removeEmailFromInvites,
+  changeGuests
 }: ChangeParticipantsProps) {
   return (
     <div className='fixed inset-0 bg-black/60 flex items-center justify-center'>
@@ -64,11 +66,11 @@ export function ChangeParticipantsModal({
 
           <div className='w-full h-3' />
 
-          <Button type="submit" variant="secundary" >
+          <Button type="submit" variant="secundary" onClick={() => changeGuests()} >
             Alterar Convidados
             <Settings className='size-5' />
           </Button>
-          
+
         </div>
       </div>
     </div>
