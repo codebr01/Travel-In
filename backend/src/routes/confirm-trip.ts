@@ -1,6 +1,5 @@
 import type { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import nodemailer from "nodemailer";
 import { z } from "zod";
 import { dayjs } from "../lib/dayjs";
 import { getMailClient } from "../lib/mail";
@@ -46,7 +45,6 @@ export async function confirmTrip(app: FastifyInstance) {
     const formattedStartDate = dayjs(trip.starts_at).format('LL')
     const formattedEndDate = dayjs(trip.ends_at).format('LL')
 
-
     const mail = await getMailClient()
 
     await Promise.all(
@@ -56,8 +54,8 @@ export async function confirmTrip(app: FastifyInstance) {
 
         const message = await mail.sendMail({
           from: {
-            name: 'Equipe plann.er',
-            address: 'teste@plann.er.com'
+            name: 'Equipe Trip Planner',
+            address: 'plannert45@gmail.com'
           },
           to: participant.email,
           subject: `Confirme sua presença na para ${trip.destination} em ${formattedStartDate}`,
@@ -68,7 +66,7 @@ export async function confirmTrip(app: FastifyInstance) {
               <p>Para confirmar sua presença na viagem, clique no link abaixo:</p>
               <p></p>
               <p>
-                <a href="${confirmationLink}">Confirmar viagem</a>
+                <a href="${confirmationLink}" target="_blank">Confirmar viagem</a>
               </p>
               <p></p>
               <p>Caso esteja usando dispositivo móvel, você também pode confirmar a viagem pelos aplicativos:</p>
@@ -76,11 +74,21 @@ export async function confirmTrip(app: FastifyInstance) {
             </div>
           `.trim()
         })
-    
-        console.log(nodemailer.getTestMessageUrl(message))
       })
     )
 
-    return reply.redirect(`${env.WEB_BASE_URL}/trips/${tripId}`)
+    // return reply.redirect(`${env.WEB_BASE_URL}/trips/${tripId}`)
+    return reply.type('text/html').send(`
+      <html>
+        <head>
+          <title>Confirmação</title>
+        </head>
+        <body>
+          <h1>Confirmação</h1>
+          <p>Você confirmou a viagem!</p>
+        </body>
+      </html>
+    `.trim());
+
   })
 }

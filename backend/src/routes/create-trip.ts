@@ -1,6 +1,5 @@
 import type { FastifyInstance } from "fastify"
 import { ZodTypeProvider } from "fastify-type-provider-zod"
-import nodemailer from "nodemailer"
 import { z } from "zod"
 import { prisma } from "../lib/prisma"
 import { getMailClient } from "../lib/mail"
@@ -99,33 +98,36 @@ export async function createTrip(app: FastifyInstance) {
 
     const mail = await getMailClient()
 
-    const message = await mail.sendMail({
-      from: {
-        name: 'Equipe plann.er',
-        address: 'teste@plann.er.com'
-      },
-      to: {
-        name: owner_name,
-        address: owner_email
-      },
-      subject: `Confirme sua vaigem para ${destination} em ${formattedStartDate}`,
-      html: `
-        <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6;">
-          <p>Você solicitou a criação de uma viagem de <strong>${destination}</strong>, Brasil nas dastas <strong> ${formattedStartDate} até ${formattedEndDate}</strong>.</p>
-          <p></p>
-          <p>Para confirmar sua viagem, clique no link abaixo:</p>
-          <p></p>
-          <p>
-            <a href="${confirmationLink}">Confirmar viagem</a>
-          </p>
-          <p></p>
-          <p>Caso esteja usando dispositivo móvel, você também pode confirmar a viagem pelos aplicativos:</p>
-          <p>Caso você não saiba do que se trata esse email, apenas ignore.</p>
-        </div>
-      `.trim()
-    })
-
-    console.log(nodemailer.getTestMessageUrl(message))
+    try {
+      const message = await mail.sendMail({
+        from: {
+          name: 'Trip Planner',
+          address: 'plannert45@gmail.com'
+        },
+        to: {
+          name: owner_name,
+          address: owner_email
+        },
+        subject: `Confirme sua viagem para ${destination} em ${formattedStartDate}`,
+        html: `
+          <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6;">
+            <p>Você solicitou a criação de uma viagem de <strong>${destination}</strong>, Brasil nas datas <strong> ${formattedStartDate} até ${formattedEndDate}</strong>.</p>
+            <p></p>
+            <p>Para confirmar sua viagem, clique no link abaixo:</p>
+            <p></p>
+            <p>
+              <a href="${confirmationLink}" target="_blank">Confirmar viagem</a>
+            </p>
+            <p></p>
+            <p>Caso esteja usando dispositivo móvel, você também pode confirmar a viagem pelos aplicativos:</p>
+            <p>Caso você não saiba do que se trata esse email, apenas ignore.</p>
+          </div>
+        `.trim()
+      });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      throw new ClientError('Failed to send invitation email');
+    }
 
     return { tripId: trip.id }
   })
