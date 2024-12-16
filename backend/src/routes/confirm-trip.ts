@@ -78,6 +78,7 @@ export async function confirmTrip(app: FastifyInstance) {
     )
 
     // return reply.redirect(`${env.WEB_BASE_URL}/trips/${tripId}`)
+    
     return reply.type('text/html').send(`
       <html>
         <head>
