@@ -21,6 +21,7 @@ import { validateToken } from "./routes/validade-token"
 import { env } from "./env"
 import { getTrips } from "./routes/get-trips"
 import { getUser } from "./routes/get-user"
+// import { changeGuests } from "./routes/change-guests"
 
 
 const app = fastify();

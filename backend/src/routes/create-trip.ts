@@ -1,6 +1,5 @@
 import type { FastifyInstance } from "fastify"
 import { ZodTypeProvider } from "fastify-type-provider-zod"
-import nodemailer from "nodemailer"
 import { z } from "zod"
 import { prisma } from "../lib/prisma"
 import { getMailClient } from "../lib/mail"
@@ -24,7 +23,7 @@ export async function createTrip(app: FastifyInstance) {
     },
   }, async (request) => {
 
-    const { destination, starts_at, ends_at, owner,owner_name, owner_email, emails_to_invite } = request.body
+    const { destination, starts_at, ends_at, owner, owner_name, owner_email, emails_to_invite } = request.body
 
     if (dayjs(starts_at).isBefore(new Date())) {
       throw new ClientError('Invalid trip start date.')
@@ -34,9 +33,43 @@ export async function createTrip(app: FastifyInstance) {
       throw new ClientError('Invalid trip end date.')
     }
 
+    const conflictingTrips = await prisma.trip.findMany({
+      where: {
+        OR: [
+          { owner }, // O usuário é o proprietário
+          {
+            participants: {
+              some: {
+                email: owner_email // O usuário é participante
+              }
+            }
+          }
+        ],
+        AND: [
+          {
+            OR: [
+              {
+                starts_at: {
+                  lte: ends_at, // Início da viagem no banco é antes ou durante o término da nova viagem
+                },
+                ends_at: {
+                  gte: starts_at, // Término da viagem no banco é depois ou durante o início da nova viagem
+                }
+              }
+            ]
+          }
+        ]
+      }
+    });
+
+    if (conflictingTrips.length > 0) {
+      throw new ClientError('You already have a trip during the selected dates.');
+    }
+
     const trip = await prisma.trip.create({
       data: {
         owner,
+        owner_email: owner_email,
         destination,
         starts_at,
         ends_at,
@@ -58,8 +91,6 @@ export async function createTrip(app: FastifyInstance) {
       }
     })
 
-    console.log(trip)
-
     const formattedStartDate = dayjs(starts_at).format('LL')
     const formattedEndDate = dayjs(ends_at).format('LL')
 
@@ -67,33 +98,36 @@ export async function createTrip(app: FastifyInstance) {
 
     const mail = await getMailClient()
 
-    const message = await mail.sendMail({
-      from: {
-        name: 'Equipe plann.er',
-        address: 'teste@plann.er.com'
-      },
-      to: {
-        name: owner_name,
-        address: owner_email
-      },
-      subject: `Confirme sua vaigem para ${destination} em ${formattedStartDate}`,
-      html: `
-        <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6;">
-          <p>Você solicitou a criação de uma viagem de <strong>${destination}</strong>, Brasil nas dastas <strong> ${formattedStartDate} até ${formattedEndDate}</strong>.</p>
-          <p></p>
-          <p>Para confirmar sua viagem, clique no link abaixo:</p>
-          <p></p>
-          <p>
-            <a href="${confirmationLink}">Confirmar viagem</a>
-          </p>
-          <p></p>
-          <p>Caso esteja usando dispositivo móvel, você também pode confirmar a viagem pelos aplicativos:</p>
-          <p>Caso você não saiba do que se trata esse email, apenas ignore.</p>
-        </div>
-      `.trim()
-    })
-
-    console.log(nodemailer.getTestMessageUrl(message))
+    try {
+      const message = await mail.sendMail({
+        from: {
+          name: 'Trip Planner',
+          address: 'plannert45@gmail.com'
+        },
+        to: {
+          name: owner_name,
+          address: owner_email
+        },
+        subject: `Confirme sua viagem para ${destination} em ${formattedStartDate}`,
+        html: `
+          <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6;">
+            <p>Você solicitou a criação de uma viagem de <strong>${destination}</strong>, Brasil nas datas <strong> ${formattedStartDate} até ${formattedEndDate}</strong>.</p>
+            <p></p>
+            <p>Para confirmar sua viagem, clique no link abaixo:</p>
+            <p></p>
+            <p>
+              <a href="${confirmationLink}" target="_blank">Confirmar viagem</a>
+            </p>
+            <p></p>
+            <p>Caso esteja usando dispositivo móvel, você também pode confirmar a viagem pelos aplicativos:</p>
+            <p>Caso você não saiba do que se trata esse email, apenas ignore.</p>
+          </div>
+        `.trim()
+      });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      throw new ClientError('Failed to send invitation email');
+    }
 
     return { tripId: trip.id }
   })

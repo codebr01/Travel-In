@@ -33,7 +33,7 @@ export function Dashboard() {
 
   useEffect(() => {
     // Carrega as viagens do usuário
-    api.get(`/dashboard/${userId}`).then((response) => {
+    api.get(`/dashboard/${userId}/trips`).then((response) => {
       setTrips(response.data.trips);
     });
 
@@ -63,22 +63,19 @@ export function Dashboard() {
   }
 
   return (
-    <div className="flex items-center justify-center bg-pattner bg-no-repeat bg-center">
+    <div className="flex items-center justify-center">
   
-      <div className='flex items-center justify-center mt-10 w-full'>
+      <div className='flex items-center justify-center mt-20 w-full bg-pattner bg-no-repeat bg-center'>
   
-        {/* UserInfo ficará fixo */}
-        <div className='flex-shrink-0'>
+        <div className='flex-shrink-0 '>
           <UserInfo
             user_name={user.user_name}
             logout={logout}
           />
         </div>
   
-        {/* Espaço entre as divs */}
         <div className='h-full w-20' />
   
-        {/* CreateTripInfo será limitado */}
         <div className="flex-grow max-w-[600px]">
   
           <div className="flex-1 rounded-lg shadow-md w-full">

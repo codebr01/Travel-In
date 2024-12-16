@@ -7,10 +7,13 @@ import { InviteGuestsStep } from './steps/invite-guests-step';
 import { DateRange } from 'react-day-picker';
 import { api } from '../../lib/axios';
 import logo from '../../assets/logo1.png';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function CreateTripPage() {
 
   const { owner } = useParams<{ owner: string }>()
+  const userId = localStorage.getItem("userId")
 
   const navigate = useNavigate()
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
@@ -70,19 +73,27 @@ export function CreateTripPage() {
       return
     }
 
-    const response = await api.post('/trips', {
-      destination,
-      starts_at: eventStartAndEndDates.from,
-      ends_at: eventStartAndEndDates.to,
-      owner,
-      emails_to_invite: emailsToInvite,
-      owner_name: ownerName,
-      owner_email: ownerEmail
-    })
-
-    const { tripId } = response.data
-
-    navigate(`/trips/${tripId}`)
+    try {
+      const response = await api.post('/trips', {
+        destination,
+        starts_at: eventStartAndEndDates.from,
+        ends_at: eventStartAndEndDates.to,
+        owner,
+        emails_to_invite: emailsToInvite,
+        owner_name: ownerName,
+        owner_email: ownerEmail,
+      });
+  
+      if (response.status === 400) {
+        toast.error(response.data.message || 'Erro ao criar viagem.');
+        return;
+      }
+  
+      // const { tripId } = response.data;
+      navigate(`/dashboard/${userId}`);
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Ocorreu um erro ao criar a viagem.');
+    }
   }
 
   function addNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
@@ -116,6 +127,7 @@ export function CreateTripPage() {
 
   return (
     <div className="h-screen flex items-center justify-center bg-black">
+      <ToastContainer/>
       <div className="max-w-3xl w-full px-6 text-center space-y-10">
         <div className='flex flex-col items-center gap-3'>
           <img src={logo} alt="travel-in" />
@@ -163,6 +175,9 @@ export function CreateTripPage() {
           createTrip={createTrip}
           setOwnerName={setOwnerName}
           setOwnerEmail={setOwnerEmail}
+          destination={destination}
+          starts_at={eventStartAndEndDates?.from || null}
+          ends_at={eventStartAndEndDates?.to || null}
         />
       )}
 

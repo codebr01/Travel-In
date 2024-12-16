@@ -6,7 +6,7 @@ import { ClientError } from "../errors/client-error"
 
 export async function getTrips(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    '/dashboard/:userId',
+    '/dashboard/:userId/trips',
     {
       schema: {
         params: z.object({
