@@ -50,6 +50,7 @@ export function Dashboard() {
 
   function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     navigate('/');
   }
 
