@@ -37,7 +37,7 @@ export function LoginPage() {
       }, 2000);
 
     } catch (error: any) {
-      if (error.response && error.response.status === 400) {
+      if (error.response || error.response.status === 400) {
         toast.error(error.response.data.message || "Erro ao fazer login");
       } else {
         toast.error("Erro inesperado. Tente novamente mais tarde.");
