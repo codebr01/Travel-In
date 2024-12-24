@@ -8,6 +8,7 @@ import { UserInfo } from './user-info';
 import { CreateTripInfo } from './create-trip-info';
 import { ListTrips } from './list-trips';
 import { NoTrips } from './no-trips';
+import { FeedbackInfo } from './feedback-info';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -81,6 +82,10 @@ export function Dashboard() {
   
           <div className="flex-1 rounded-lg shadow-md w-full">
   
+            <FeedbackInfo />
+
+            <div className="w-full h-px bg-zinc-800" />
+
             <CreateTripInfo userId={userId} />
   
             <div className="w-full h-px bg-zinc-800" />

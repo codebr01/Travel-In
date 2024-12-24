@@ -63,3 +63,12 @@ model User {
 
   @@map("users")
 }
+
+model Feedback {
+  id         String @id @default(uuid())
+  user_name  String @default("Anônimo")
+  user_email String @default("Anônimo")
+  message    String @default("Sem mensagem")
+
+  @@map("feedbacks")
+}
