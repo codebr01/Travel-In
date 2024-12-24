@@ -13,8 +13,8 @@ export function UserInfo({
     <div className="flex-1 text-white rounded-lg shadow-md text-center">
       <SquareUser className="w-[200px] h-[200px] mx-auto" />
       <h2 className="text-xl mt-5 font-semibold">Bem-vindo</h2>
-      <h3 className='text-2xl font-semibold'>{user_name}</h3>
-      <p className="mb-5">Gerencie seu perfil.</p>
+      <h3 className='text-2xl font-semibold mb-1'>{user_name}</h3>
+      {/* <p className="mb-5">Gerencie seu perfil.</p> */}
       <div className="flex items-center gap-4 justify-center">
         {/* <div className="flex items-center">
           <button
