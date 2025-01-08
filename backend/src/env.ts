@@ -1,4 +1,7 @@
-import { z } from 'zod'
+import * as dotenv from 'dotenv';
+dotenv.config();  // Carrega as variáveis do arquivo .env
+
+import { z } from 'zod';
 
 const envSchema = z.object({
   DATABASE_URL: z.string().url(),
@@ -11,6 +14,6 @@ const envSchema = z.object({
   PORT_SMTP: z.coerce.number(),
   USER_SMTP: z.string(),
   PASS_SMTP: z.string()
-})
+});
 
-export const env = envSchema.parse(process.env)
+export const env = envSchema.parse(process.env);  // Valida as variáveis carregadas
