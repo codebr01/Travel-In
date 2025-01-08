@@ -59,7 +59,7 @@ export function SendFeedbackModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Seu nome completo"
-              maxLength={20}
+              maxLength={100}
               required
               className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
             />
@@ -73,7 +73,7 @@ export function SendFeedbackModal({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Seu e-mail pessoal"
-              maxLength={20}
+              maxLength={100}
               required
               className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
             />
