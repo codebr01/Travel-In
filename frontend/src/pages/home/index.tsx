@@ -13,23 +13,27 @@ export function HomePage() {
   // const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const validToken = async () => {
 
-      const response = await api.post("/validate", { token });
-      const isValid = response.data.valid;
-
-      console.log(response.data.message)
-
-      if (isValid) {
-        // setIsAuthenticated(true);
-        navigate(`/dashboard/${userId}`)
+      if (!token) {
+        navigate('/');
       } else {
-        toast.error(`${response.data.message}`)
+        const response = await api.post("/validate", { token });
+        const isValid = response.data.valid;
+
+        if (isValid) {
+          // setIsAuthenticated(true);
+          toast.error("Redirecionando para o dashboard.")
+          navigate(`/dashboard/${userId}`)
+        } else {
+          toast.error(`${response.data.message}`)
+          navigate('/');
+        }
       }
     };
     validToken();

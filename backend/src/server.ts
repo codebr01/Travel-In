@@ -21,6 +21,7 @@ import { validateToken } from "./routes/validade-token"
 import { env } from "./env"
 import { getTrips } from "./routes/get-trips"
 import { getUser } from "./routes/get-user"
+import { createFeedback } from "./routes/create-feedback"
 // import { changeGuests } from "./routes/change-guests"
 
 
@@ -52,6 +53,7 @@ app.register(getParticipant);
 app.register(validateToken);
 app.register(getTrips);
 app.register(getUser);
+app.register(createFeedback);
 
 app.listen({ port: env.PORT }).then(() => {
   console.log('Server running -> http://localhost:3333');
