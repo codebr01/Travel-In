@@ -70,7 +70,7 @@ export function Section() {
         <div className="w-[90%] max-w-[1200px] mx-auto">
           <h2 className="text-center text-4xl font-bold mb-4">Pronto para começar sua próxima aventura?</h2>
           <p className="mb-8">Junte-se ao Trip Planner e transforme o planejamento de viagens em uma experiência fácil e divertida.</p>
-          <a href="cadastro.html" className="bg-green-600 text-white no-underline py-3 px-6 text-lg rounded-md mt-5 inline-block">
+          <a href="/register" className="bg-green-600 text-white no-underline py-3 px-6 text-lg rounded-md mt-5 inline-block">
             Inscreva-se Agora
           </a>
         </div>

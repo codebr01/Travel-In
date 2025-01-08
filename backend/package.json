@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch --env-file .env src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start:prod": "node dist/server.js",
+    "prisma:generate": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20.14.10",
     "@types/nodemailer": "^6.4.15",
+    "dotenv-cli": "^8.0.0",
     "prisma": "^5.16.1",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"
@@ -23,7 +27,10 @@
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
+    "env": "^0.0.2",
     "fastify": "^4.28.1",
+    "fastify-cors": "^6.0.3",
     "fastify-type-provider-zod": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
     "mailersend": "^2.3.0",
