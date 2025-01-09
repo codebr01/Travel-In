@@ -1,5 +1,6 @@
 import { Map, MapPin, Plane } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Trip {
   id: string;
@@ -19,6 +20,7 @@ export function ListTrips({
 }: ListTripsProps) {
 
   const [showTooltip, setShowTooltip] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -58,13 +60,13 @@ export function ListTrips({
               </div>
 
               <div className="flex items-center">
-                <a
-                  href={`/trips/${trip.id}`}
+                <button
+                  onClick={() => navigate(`/trips/${trip.id}`)}
                   className="bg-lime-300 text-lime-950 hover:bg-lime-400 py-2 px-4 rounded-md text-center text-sm transition duration-300 flex items-center"
                 >
                   <Map className="mr-2 size-5" />
                   Ver Detalhes
-                </a>
+                </button>
               </div>
 
             </div>
