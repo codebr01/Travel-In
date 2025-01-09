@@ -2,7 +2,7 @@ import type { FastifyInstance } from "fastify"
 import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from "zod"
 import { prisma } from "../lib/prisma"
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { ClientError } from "../errors/client-error"
 
 
