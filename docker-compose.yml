@@ -11,14 +11,3 @@ services:
       - /usr/src/app/node_modules
     environment:
       DATABASE_URL: "file:/usr/src/app/prisma/dev.db"
-    depends_on:
-      - frontend
-
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "5173:5173" # Correção: ports está como uma lista
-    volumes:
-      - ./frontend:/usr/src/app
-      - /usr/src/app/node_modules
