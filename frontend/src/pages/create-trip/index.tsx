@@ -154,10 +154,10 @@ export function CreateTripPage() {
           ) : null}
         </div>
 
-        <p className="text-zinc-500 text-sm">
+        {/* <p className="text-zinc-500 text-sm">
           Ao planejar sua viagem pela plann.er você automaticamente concorda <br />
           com os <a className="text-zinc-300 underline" href="#">termos de uso</a> e <a className="text-zinc-300 underline" href="#">políticas de privacidade</a>.
-        </p>
+        </p> */}
       </div>
 
       {isGuestsModalOpen && (

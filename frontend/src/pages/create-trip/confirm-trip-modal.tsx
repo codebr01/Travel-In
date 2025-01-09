@@ -33,7 +33,7 @@ export function ConfirmTripModal({
             </button>
           </div>
           <p className='text-sm text-zinc-400'>
-            Para concluir a criação da viagem para <span className='font-semibold text-zinc-100'>{destination}</span> nas datas <span className='font-semibold text-zinc-100'> 
+            Para concluir a criação da viagem para <span className='font-semibold text-zinc-100'>{destination}</span> nas datas <span className='font-semibold text-zinc-100'>
               {starts_at ? starts_at.toLocaleDateString() : "Data inicial não definida"} até {ends_at ? ends_at.toLocaleDateString() : "Data final não definida"}
             </span> preencha os seus dados abaixo:
           </p>
@@ -61,6 +61,12 @@ export function ConfirmTripModal({
               className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
               onChange={event => setOwnerEmail(event.target.value)}
             />
+          </div>
+
+          <div className='space-y-2'>
+            <p className='text-center text-lg text-zinc-400'>
+              Ao clicar em <span className='font-semibold text-zinc-100'>"Confirmar criação da viagem"</span> será enviado um link de confirmação ao email preenchido.
+            </p>
           </div>
 
           <Button type="submit" variant="primary" size="full" >

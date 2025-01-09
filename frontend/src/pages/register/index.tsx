@@ -44,6 +44,14 @@ export function RegisterPage() {
     }
   }
 
+  function handleLogin() {
+    navigate('/login')
+  }
+
+  function handleInicio() {
+    navigate('/')
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-zinc-950">
       <ToastContainer />
@@ -91,16 +99,16 @@ export function RegisterPage() {
           </Button>
         </form>
         <p className="text-sm text-center text-gray-300">
-          Já tem uma conta? <a href="/login" className="text-lime-200 underline">Faça login</a>
+          Já tem uma conta? <button className="text-lime-200 underline" onClick={handleLogin}>Faça login</button>
         </p>
         <div>
-          <a
+          <button
             className="flex items-center gap-2 text-sm text-lime-200 hover:text-lime-600 underline"
-            href="/"
+            onClick={handleInicio}
           >
             <ArrowLeftCircleIcon />
             Voltar
-          </a>
+          </button>
         </div>
       </div>
     </div>

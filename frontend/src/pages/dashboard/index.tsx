@@ -8,6 +8,7 @@ import { UserInfo } from './user-info';
 import { CreateTripInfo } from './create-trip-info';
 import { ListTrips } from './list-trips';
 import { NoTrips } from './no-trips';
+import { ToastContainer } from 'react-toastify';
 // import { FeedbackInfo } from './feedback-info';
 
 dayjs.extend(utc);
@@ -66,6 +67,8 @@ export function Dashboard() {
 
   return (
     <div className="flex items-center justify-center">
+
+      <ToastContainer/>
   
       <div className='flex items-center justify-center mt-20 w-full bg-pattner bg-no-repeat bg-center'>
   

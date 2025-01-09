@@ -45,6 +45,14 @@ export function LoginPage() {
     }
   };
 
+  function handleRegister() {
+    navigate('/register')
+  }
+
+  function handleInicio() {
+    navigate('/')
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-zinc-950">
       <ToastContainer />
@@ -81,16 +89,16 @@ export function LoginPage() {
           </Button>
         </form>
         <p className="text-sm text-center text-gray-300">
-          Não tem uma conta? <a href="/register" className="text-lime-200 underline">Cadastre-se</a>
+          Não tem uma conta? <button className="text-lime-200 underline" onClick={handleRegister}>Cadastre-se</button>
         </p>
         <div>
-          <a
+          <button
             className="flex items-center gap-2 text-sm text-lime-200 hover:text-lime-600 underline"
-            href="/"
+            onClick={handleInicio}
           >
             <ArrowLeftCircleIcon />
             Voltar
-          </a>
+          </button>
         </div>
 
       </div>
