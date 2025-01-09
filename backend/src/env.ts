@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-dotenv.config();  // Carrega as variáveis do arquivo .env
+dotenv.config({ path: '../.env' });  // Ajuste o caminho para o arquivo .env
 
 import { z } from 'zod';
 

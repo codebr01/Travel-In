@@ -17,6 +17,7 @@
     "buffer": "^6.0.3",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
     "env": "^0.0.2",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "dotenv-cli": "^8.0.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
