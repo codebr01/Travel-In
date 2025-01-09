@@ -2,6 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
