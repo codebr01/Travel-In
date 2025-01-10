@@ -2,6 +2,7 @@ import { ArrowLeftCircleIcon, ArrowRight, Calendar, MapPin, Settings2, X } from 
 import { Button } from "../../../components/button";
 import { useState } from "react";
 import { DateRange, DayPicker } from "react-day-picker";
+import { ptBR } from 'date-fns/locale';
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
@@ -82,13 +83,16 @@ export function DestinationAndDateStep({
           <div className=' rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5'>
             <div className='space-y-2'>
               <div className='flex items-center justify-between'>
-                <h2 className='text-lg font-semibold'>Selecione a data</h2>
+                <div className="flex-col">
+                  <h2 className='text-lg font-semibold'>Selecione as datas da sua viagem</h2>
+                  <p>Ex: 1 de janeiro até 10 de janeiro</p>
+                </div>
                 <button type='button' onClick={closeDatePicker}>
-                  <X className='size-5 text-zinc-400' />
+                  <X className='ml-5 size-5 text-zinc-400' />
                 </button>
               </div>
             </div>
-            <DayPicker mode="range" selected={eventStartAndEndDates} onSelect={setEventStartAndEndDates} />
+            <DayPicker mode="range" selected={eventStartAndEndDates} onSelect={setEventStartAndEndDates} locale={ptBR}/>
           </div>
         </div>
       )}
