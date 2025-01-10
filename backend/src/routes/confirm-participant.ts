@@ -33,17 +33,17 @@ export async function confirmParticipants(app: FastifyInstance) {
       data: { is_confirmed: true }
     })
 
-    // return reply.redirect(`${env.WEB_BASE_URL}/trips/${participant.trip_id}`)
-    return reply.type('text/html').send(`
-      <html>
-        <head>
-          <title>Confirmação</title>
-        </head>
-        <body>
-          <h1>Confirmação</h1>
-          <p>Você confirmou sua presença!</p>
-        </body>
-      </html>
-    `.trim());
+    return reply.redirect(`${env.WEB_BASE_URL}/trips/${participant.trip_id}`)
+    // return reply.type('text/html').send(`
+    //   <html>
+    //     <head>
+    //       <title>Confirmação</title>
+    //     </head>
+    //     <body>
+    //       <h1>Confirmação</h1>
+    //       <p>Você confirmou sua presença!</p>
+    //     </body>
+    //   </html>
+    // `.trim());
   })
 }

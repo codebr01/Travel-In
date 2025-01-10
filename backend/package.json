@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
-    "node": "22"
+    "node": "22.12.0"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "start:prod": "node dist/server.js",
+    "build": "tsup src",
+    "start": "node dist/server.js",
     "prisma:generate": "prisma generate"
   },
   "keywords": [],
@@ -21,7 +21,8 @@
     "@types/nodemailer": "^6.4.15",
     "dotenv-cli": "^8.0.0",
     "prisma": "^5.16.1",
-    "tsx": "^4.16.2",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
     "typescript": "^5.5.3"
   },
   "dependencies": {

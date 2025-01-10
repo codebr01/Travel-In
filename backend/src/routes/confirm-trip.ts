@@ -34,7 +34,7 @@ export async function confirmTrip(app: FastifyInstance) {
     }
 
     if (trip.is_confirmed) {
-      return reply.redirect(`${env.WEB_BASE_URL}/trips/${tripId}`)
+      return reply.redirect(`${env.WEB_BASE_URL}trips/${tripId}`)
     }
 
     await prisma.trip.update({
@@ -69,6 +69,7 @@ export async function confirmTrip(app: FastifyInstance) {
                 <a href="${confirmationLink}" target="_blank">Confirmar viagem</a>
               </p>
               <p></p>
+              <p>Ao clicar no link será redirecionado para uma nova aba, salve o link de redirecionamento!</p>
               <p>Caso esteja usando dispositivo móvel, você também pode confirmar a viagem pelos aplicativos:</p>
               <p>Caso você não saiba do que se trata esse email, apenas ignore.</p>
             </div>
