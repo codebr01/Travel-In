@@ -34,7 +34,7 @@ Desenvolvedora Backend 🖥️
 Desenvolvedora Frontend, Designer 🎨  
 [LinkedIn](https://www.linkedin.com/in/gamesbrunaa/)  
 [GitHub](https://github.com/gamesbrunaa)  
-*Contato*: 📧 email | 📱 +55 89 99449-0526
+*Contato*: 📧 gamessbrunaa@gmail.com | 📱 +55 89 99449-0526
 
 
 ## 🚀 Tecnologias Utilizadas
@@ -69,6 +69,77 @@ Desenvolvedora Frontend, Designer 🎨
 - **Backend**: Hospedado na **Render** 🖥️, proporcionando um ambiente seguro e escalável para o servidor e as APIs.  
 
 ---
+
+## 🚀 Como Usar
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+### 1. **Clone o repositório**
+
+Primeiro, clone o repositório para sua máquina local utilizando o comando abaixo:
+
+```bash
+git clone https://github.com/codebr01/Travel-In.git
+```
+
+### 2. **Instale as dependências**
+
+O projeto é dividido em duas partes: **Frontend** e **Backend**. Siga os passos para instalar as dependências em ambas as pastas.
+
+#### **Frontend**
+
+- Navegue até a pasta do **frontend**:
+
+  ```bash
+  cd frontend
+  ```
+
+- Instale as dependências com o comando:
+
+  ```bash
+  npm install
+  ```
+
+#### **Backend**
+
+- Navegue até a pasta do **backend**:
+
+  ```bash
+  cd ../backend
+  ```
+
+- Instale as dependências do backend:
+
+  ```bash
+  npm install
+  ```
+
+### 3. **Inicie o servidor**
+
+Agora, inicie o servidor para **Frontend** e **Backend**.
+
+#### **Frontend**
+
+- Na pasta **frontend**, execute:
+
+  ```bash
+  npm run dev
+  ```
+
+#### **Backend**
+
+- Na pasta **backend**, execute:
+
+  ```bash
+  npm run dev
+  ```
+
+### 4. **Acesse o sistema**
+
+- O **Frontend** estará disponível em `localhost:5173`.
+- O **Backend** estará rodando nas portas padrão configuradas (verifique o `.env` para detalhes, se necessário).
+
+Agora, você pode começar a planejar suas viagens e aproveitar todas as funcionalidades do **Trip Planner**! 🌍✈️
 
 ## 🌍 **Explore o Sistema**
 
